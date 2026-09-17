@@ -1,19 +1,23 @@
-# Security+ Practice Exam (SY0-701)
+# Security+ Practice Lab — SY0-701
 
-Jednostronicowa aplikacja do symulacji egzaminu CompTIA Security+ SY0-701. Projekt działa bez instalowania pakietów: otwórz `index.html` w przeglądarce albo opublikuj go przez GitHub Pages.
+A dependency-free, English-language practice application for CompTIA Security+ SY0-701. Open `index.html` in a browser or deploy the repository as a static site.
 
-## Co zawiera
+## Features
 
-- 90 autorskich pytań rozłożonych wg blueprintu SY0-701: 12% / 22% / 18% / 28% / 20%.
-- Limit 90 minut w trybie egzaminu i punkt orientacyjny 750/900.
-- Pytania jednokrotnego i wielokrotnego wyboru oraz 4 zadania PBQ.
-- Flagi, nawigacja po pytaniach, zapis postępu w przeglądarce oraz analiza per domena.
-- Natychmiastowe wyjaśnienie właściwej odpowiedzi w trybie nauki; pełny przegląd po oddaniu w trybie egzaminu.
+- 1,000 original, exam-style scenario variants across all five SY0-701 domains.
+- 90-question / 90-minute mock exams with the published domain weighting: 12% / 22% / 18% / 28% / 20%.
+- Multiple-choice, multiple-response, and performance-based (PBQ) items.
+- Study mode with instant feedback, correct answers, and explanations.
+- A searchable glossary of Security+ acronyms and core concepts.
+- Per-domain result analysis, flagged questions, and locally saved progress.
 
-## Uruchomienie i publikacja
+## Run locally
 
-1. Przenieś zawartość tego katalogu do repozytorium `Comptia Security+ Quiz`.
-2. Otwórz `index.html` lokalnie lub włącz **Settings → Pages → Deploy from a branch → main / root** na GitHubie.
+Download or clone the repository and open `index.html` in a current browser. No server, packages, or build step are required.
 
-> To narzędzie jest materiałem treningowym, nie jest powiązane z CompTIA. Wszystkie pytania są autorskie — nie używa zrzutów (exam dumps) ani odtworzonych pytań egzaminacyjnych. Rzeczywisty wynik CompTIA jest skalowany, dlatego wynik aplikacji jest jedynie szacunkiem gotowości.
+## Publish
+
+Deploy the static files to GitHub Pages (for a public repository), Cloudflare Pages, or Netlify.
+
+> This is an independent study resource and is not affiliated with CompTIA. All practice content is original; it does not use recalled exam questions or exam dumps. CompTIA uses scaled scoring, so the displayed score is a readiness estimate, not an official result.
 
