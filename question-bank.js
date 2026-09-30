@@ -329,3 +329,91 @@ const GLOSSARY = [
   ['AUP','Acceptable Use Policy: rules for permitted use of organization technology and information.','Management'],
 ].map(([term,definition,domain])=>({term,definition,domain}));
 
+const AZ_DOMAINS = {
+  core: { name: 'Core networking infrastructure', weight: 28 },
+  connectivity: { name: 'Connectivity services', weight: 23 },
+  delivery: { name: 'Application delivery services', weight: 18 },
+  private: { name: 'Private access to Azure services', weight: 13 },
+  security: { name: 'Azure network security services', weight: 18 }
+};
+const AZ_BANK = [
+  ...enSeries('core', 'for an Azure deployment,', [
+    {stem:'which resource provides a logically isolated network boundary for Azure workloads?',options:['Virtual network (VNet)','Resource group','Availability set','Management group'],correct:0,explanation:'A VNet is the foundational logical network boundary for Azure resources.'},
+    {stem:'which mechanism directs subnet traffic to a virtual appliance or virtual network gateway?',options:['User-defined route (UDR)','Network security group','Private DNS zone','Application security group'],correct:0,explanation:'A UDR in a route table controls the next hop for subnet traffic.'},
+    {stem:'which Azure service provides outbound SNAT at scale for resources in a subnet?',options:['NAT Gateway','Azure Bastion','Private Endpoint','Route Server'],correct:0,explanation:'NAT Gateway provides scalable, predictable outbound connectivity and SNAT.'},
+    {stem:'which TWO actions are required to use a private DNS zone for Azure private endpoints?',options:['Link the zone to the VNet','Create the appropriate private DNS records','Assign a public IP prefix','Enable an NSG service tag'],correct:[0,1],multi:true,explanation:'The private DNS zone must be linked to the VNet and contain the records that map the private endpoint name to its private IP.'},
+    {stem:'which service should be used to inspect effective routes and diagnose packet paths in Azure?',options:['Azure Network Watcher','Azure Policy','Azure Advisor','Microsoft Sentinel'],correct:0,explanation:'Network Watcher includes effective routes, next hop, connection troubleshoot, and other network diagnostics.'},
+    {stem:'which Azure component exchanges dynamic routes between network virtual appliances and a virtual network?',options:['Azure Route Server','Azure Front Door','Azure DNS','Azure Load Balancer'],correct:0,explanation:'Azure Route Server enables BGP route exchange with supported NVAs.'}
+  ]),
+  ...enSeries('connectivity', 'for Azure hybrid connectivity,', [
+    {stem:'which connection type creates encrypted connectivity between an on-premises network and an Azure VNet over the public Internet?',options:['Site-to-site VPN','VNet peering','Private Link','Service endpoint'],correct:0,explanation:'A site-to-site VPN uses VPN gateways and IPsec/IKE across the Internet.'},
+    {stem:'which gateway configuration is required for most modern Azure VPN connections that use multiple tunnels and BGP?',options:['Route-based VPN gateway','Policy-based VPN gateway','Application Gateway','NAT Gateway'],correct:0,explanation:'Route-based VPN gateways support features such as BGP and multiple connections.'},
+    {stem:'which component represents the on-premises network and VPN device configuration in Azure?',options:['Local network gateway','Virtual network gateway','Route table','Private endpoint'],correct:0,explanation:'A local network gateway contains on-premises address spaces and VPN device information.'},
+    {stem:'which service provides dedicated private connectivity from an organization to Microsoft cloud services?',options:['ExpressRoute','Point-to-site VPN','Azure Bastion','VNet peering'],correct:0,explanation:'ExpressRoute provides private connectivity through a connectivity provider rather than the public Internet.'},
+    {stem:'which TWO choices can authenticate a point-to-site VPN user?',options:['Microsoft Entra ID','Certificate authentication','A public load balancer','A route table'],correct:[0,1],multi:true,explanation:'Point-to-site VPN supports authentication methods including certificates and Microsoft Entra ID, subject to selected tunnel type and gateway configuration.'},
+    {stem:'which feature lets a peered spoke VNet use a hub virtual network gateway?',options:['Gateway transit','Service chaining','Forced tunneling','IP forwarding'],correct:0,explanation:'Gateway transit and use remote gateways allow spokes to use a gateway in the hub.'}
+  ]),
+  ...enSeries('delivery', 'for an internet-facing Azure application,', [
+    {stem:'which Azure service provides Layer 7 HTTP/S load balancing inside a region and can include a web application firewall?',options:['Application Gateway','Azure Load Balancer','NAT Gateway','Route Server'],correct:0,explanation:'Application Gateway is a regional Layer 7 load balancer with optional WAF.'},
+    {stem:'which service is designed for global HTTP/S acceleration, edge delivery, and global WAF policy?',options:['Azure Front Door','Application Gateway','Internal Load Balancer','VPN Gateway'],correct:0,explanation:'Azure Front Door is a global application delivery service with edge routing and WAF integration.'},
+    {stem:'which Azure load-balancing service operates at Layer 4 for TCP and UDP traffic?',options:['Azure Load Balancer','Azure Front Door','Application Gateway','Traffic Manager'],correct:0,explanation:'Azure Load Balancer distributes Layer 4 TCP and UDP flows.'},
+    {stem:'which service uses DNS responses to direct clients to healthy endpoints based on a traffic-routing method?',options:['Traffic Manager','Azure Load Balancer','NAT Gateway','Private Link'],correct:0,explanation:'Traffic Manager is DNS-based traffic distribution and endpoint health monitoring.'},
+    {stem:'which TWO settings are essential when configuring an Application Gateway listener for HTTPS?',options:['A TLS certificate','A frontend IP configuration','A local network gateway','A BGP peer'],correct:[0,1],multi:true,explanation:'An HTTPS listener needs a certificate and a frontend IP configuration on the gateway.'},
+    {stem:'which routing method is best when users should be directed to the Azure endpoint with the lowest network latency?',options:['Performance routing in Traffic Manager','Priority routing only','Forced tunneling','Gateway transit'],correct:0,explanation:'Traffic Manager performance routing directs clients to the endpoint with the lowest latency.'}
+  ]),
+  ...enSeries('private', 'for a private Azure PaaS design,', [
+    {stem:'which feature assigns a private IP address from a VNet to an Azure PaaS resource?',options:['Private Endpoint','Service endpoint','Public IP prefix','NAT Gateway'],correct:0,explanation:'A private endpoint is a network interface with a private IP in the consumer VNet.'},
+    {stem:'which feature keeps a PaaS service public but extends its identity to a selected VNet subnet?',options:['Service endpoint','Private Link service','VNet peering','Azure Bastion'],correct:0,explanation:'Service endpoints extend a subnet identity to supported Azure services while the service retains a public endpoint.'},
+    {stem:'which DNS design is normally required so clients resolve a private endpoint name to its private address?',options:['Private DNS zone linked to the VNet','Public DNS zone only','Public IP prefix','Traffic Manager profile'],correct:0,explanation:'Private DNS zones provide name resolution to private endpoint addresses for linked VNets.'},
+    {stem:'which Azure capability exposes a service behind a standard load balancer privately to consumers through Private Link?',options:['Private Link service','Service endpoint policy','Azure Firewall Manager','Virtual WAN'],correct:0,explanation:'A Private Link service exposes a provider service privately through an Azure Standard Load Balancer.'},
+    {stem:'which TWO statements describe a private endpoint?',options:['It uses a private IP in a VNet','It can secure access to supported PaaS resources','It requires a public IP on the client VM','It replaces all DNS configuration automatically'],correct:[0,1],multi:true,explanation:'Private endpoints use VNet private IPs and support private access to compatible services; DNS still requires deliberate configuration.'},
+    {stem:'which control can restrict which Azure PaaS resources are reachable through service endpoints from a subnet?',options:['Service endpoint policy','Network Watcher','Application security group','Public IP prefix'],correct:0,explanation:'Service endpoint policies filter access to supported Azure service resources from a subnet.'}
+  ]),
+  ...enSeries('security', 'for Azure network protection,', [
+    {stem:'which Azure control filters inbound and outbound Layer 3 and Layer 4 traffic at a subnet or network interface?',options:['Network security group','Azure DNS','Traffic Manager','Private DNS zone'],correct:0,explanation:'NSGs contain stateful security rules and can be associated with subnets and NICs.'},
+    {stem:'which NSG feature lets rules refer to a logical group of application NICs rather than IP addresses?',options:['Application security group','Service tag','Route table','Private Link service'],correct:0,explanation:'Application security groups allow NSG rules to use logical application group membership.'},
+    {stem:'which Azure service provides centralized, stateful firewalling with network and application rules?',options:['Azure Firewall','Network security group','Azure Route Server','Azure DNS Private Resolver'],correct:0,explanation:'Azure Firewall is a managed, stateful firewall service with network and application rule processing.'},
+    {stem:'which deployment option provides a managed WAF at Microsoft global edge locations?',options:['Azure Front Door WAF','Azure Load Balancer','NAT Gateway','VPN Gateway'],correct:0,explanation:'Azure Front Door WAF protects HTTP/S applications at the global edge.'},
+    {stem:'which TWO capabilities are available in Network Watcher for NSG troubleshooting?',options:['IP flow verify','NSG flow logs','Automatic certificate issuance','BGP route advertisement'],correct:[0,1],multi:true,explanation:'Network Watcher provides IP flow verify and flow logging to inspect NSG behavior and traffic.'},
+    {stem:'which service helps protect Azure public IP resources from volumetric distributed denial-of-service attacks?',options:['Azure DDoS Protection','Azure Policy','Azure Key Vault','Azure Backup'],correct:0,explanation:'Azure DDoS Protection provides enhanced mitigation and telemetry for protected public IP resources.'}
+  ]),
+  ...Array.from({length:10},(_,i)=>pbq(`az-pbq-${i}`,['core','connectivity','delivery','private','security'][i%5],`PBQ: Select the Azure service that best fits each networking objective (scenario ${i+1}).`,[
+    {label:'Private access to a supported PaaS service',options:['Private Endpoint','Public IP prefix','Traffic Manager'],correct:0},
+    {label:'Stateful centralized network and application filtering',options:['Azure Firewall','Route table','Private DNS zone'],correct:0},
+    {label:'Global HTTP/S routing with edge WAF',options:['Azure Front Door','NAT Gateway','Local network gateway'],correct:0}
+  ],'Private Endpoint provides private PaaS access, Azure Firewall provides centralized filtering, and Azure Front Door provides global HTTP/S delivery with WAF.')),
+];
+if (AZ_BANK.length !== 1000) console.warn(`Expected 1000 AZ-700 questions, found ${AZ_BANK.length}`);
+const AZ_GLOSSARY = [
+  ['ASG','Application Security Group: logical grouping of NICs for use in NSG rules.','Network security'],
+  ['Azure Bastion','A managed service providing secure RDP and SSH access without exposing VMs with public IPs.','Connectivity'],
+  ['Azure Firewall','Managed, stateful cloud firewall with network, application, and NAT rules.','Network security'],
+  ['Azure Front Door','Global application delivery and acceleration service with optional WAF.','Application delivery'],
+  ['Azure Load Balancer','Layer 4 TCP/UDP load balancer for Azure workloads.','Application delivery'],
+  ['Azure Route Server','Managed BGP route exchange between Azure VNets and NVAs.','Core networking'],
+  ['Azure Virtual WAN','Managed networking service for large-scale branch, VPN, ExpressRoute, and virtual hub connectivity.','Connectivity'],
+  ['BGP','Border Gateway Protocol: dynamic routing protocol used by Azure VPN gateways, ExpressRoute, and Route Server.','Connectivity'],
+  ['DDoS Protection','Azure service that mitigates distributed denial-of-service attacks against protected public IP resources.','Network security'],
+  ['DNS Private Resolver','Managed Azure service for hybrid DNS resolution between Azure and on-premises networks.','Core networking'],
+  ['ExpressRoute','Private dedicated connectivity from an organization to Microsoft cloud services.','Connectivity'],
+  ['Forced tunneling','Routing Internet-bound Azure traffic through an on-premises network or security appliance.','Core networking'],
+  ['Gateway transit','A VNet peering setting that lets a spoke use a hub VPN or ExpressRoute gateway.','Connectivity'],
+  ['NAT Gateway','Managed service providing scalable outbound SNAT for a subnet.','Core networking'],
+  ['NVA','Network Virtual Appliance: a VM-based networking function such as a firewall or router.','Core networking'],
+  ['NSG','Network Security Group: stateful Layer 3/4 allow and deny rules for a subnet or NIC.','Network security'],
+  ['Private Endpoint','A private IP network interface that connects a VNet to a supported Azure service through Private Link.','Private access'],
+  ['Private Link','Azure private connectivity platform for supported PaaS services and customer-provided services.','Private access'],
+  ['Route table','A collection of user-defined routes associated with one or more subnets.','Core networking'],
+  ['Service endpoint','Extends a VNet subnet identity to supported Azure PaaS services over the Azure backbone.','Private access'],
+  ['Service tag','A named group of Azure IP prefixes used in NSG and firewall rules.','Network security'],
+  ['Traffic Manager','DNS-based global traffic distribution service with endpoint health checks.','Application delivery'],
+  ['UDR','User-Defined Route: custom route that controls a subnet next hop.','Core networking'],
+  ['VNet peering','Private Azure backbone connectivity between virtual networks.','Connectivity'],
+  ['VPN Gateway','Managed gateway for site-to-site, point-to-site, and VNet-to-VNet VPN connections.','Connectivity'],
+  ['WAF','Web Application Firewall: protection for HTTP/S apps on Application Gateway or Azure Front Door.','Network security'],
+].map(([term,definition,domain])=>({term,definition,domain}));
+const EXAMS = {
+  security: {name:'CompTIA Security+ SY0-701',shortName:'Security+ SY0-701',bank:ENGLISH_BANK,glossary:GLOSSARY,domains:DOMAINS,counts:{general:11,threats:20,architecture:16,operations:25,management:18},questions:90,seconds:5400,score:'750 / 900',description:'Cybersecurity fundamentals, operations, architecture, and governance.'},
+  az700: {name:'Microsoft Azure Network Engineer Associate — AZ-700',shortName:'AZ-700',bank:AZ_BANK,glossary:AZ_GLOSSARY,domains:AZ_DOMAINS,counts:{core:17,connectivity:14,delivery:11,private:8,security:10},questions:60,seconds:6000,score:'Practice simulation',description:'Designing and implementing Microsoft Azure networking solutions.'}
+};
+
