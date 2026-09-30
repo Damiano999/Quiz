@@ -4,16 +4,16 @@ An English-language practice application for CompTIA Security+ SY0-701 and Micro
 
 ## Features
 
-- 250 original Security+ practice questions based on the topics in the user-provided CompTIA Security+ CertMaster Study V7, with 50 entries in each of five domains.
+- 750 original Security+ practice questions across the five SY0-701 domains, with 150 entries per domain (250 existing book-aligned items plus 500 additional scenario-based items).
 - Security+ mock exams with 90 questions and a 90-minute timer, using the SY0-701 domain weighting.
 - AZ-700 practice simulations with 60 questions and a 100-minute timer. The 60-question count is a practice setting; Microsoft does not publish a fixed question count for the exam.
 - Domain practice with up to 50 randomly selected questions and a 50-minute timer.
-- Single-answer, multiple-response, and performance-based questions.
+- Single-answer, multiple-response, and performance-based questions. The interface labels only multiple-response and performance-based items; single-answer questions use radio buttons without a repetitive “Multiple choice / Select the single best answer” banner.
 - Study mode with answer checking, correct answers, and explanations.
 - A searchable glossary, question flagging, answer review, and per-domain result analysis.
 - On timeout, a mock exam submits automatically; category practice shows a time-up notice without a score.
 
-The active Security+ pool contains 250 distinct question entries, including five PBQs. Questions are newly written from the book's subject matter and do not reproduce its question text. Some questions assess related concepts from different angles.
+The active Security+ pool contains 750 distinct question entries, including multiple-response questions and performance-based tasks. The expanded items use varied scenarios and avoid selecting multiple variants of the same topic in one sitting. Questions do not reproduce exam or book question text.
 
 ## Run locally
 
