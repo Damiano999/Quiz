@@ -15,13 +15,3 @@ An English-language practice application for CompTIA Security+ SY0-701 and Micro
 
 The active Security+ pool contains 750 distinct question entries, including multiple-response questions and performance-based tasks. The expanded items use varied scenarios and avoid selecting multiple variants of the same topic in one sitting. Questions do not reproduce exam or book question text.
 
-## Run locally
-
-Open `index.html` in a current browser. No server, packages, or build step are required.
-
-## Publish
-
-Deploy the static files to GitHub Pages, Cloudflare Pages, or Netlify.
-
-> This is an independent study resource and is not affiliated with CompTIA or Microsoft. Practice scores are readiness estimates, not official exam scores.
-
