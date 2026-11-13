@@ -1,0 +1,17 @@
+.dragdrop{display:grid;grid-template-columns:minmax(210px,.8fr) minmax(0,1.2fr);gap:14px;padding:14px;background:#030e06;border:1px solid var(--line);border-radius:2px}
+.drag-bank,.drop-targets{display:grid;align-content:start;gap:9px;min-width:0}
+.drag-bank h3{font-size:.9rem;color:var(--glow);margin:0 0 2px}
+.drag-card,.drop-target{font:inherit;text-align:left;color:var(--ink);background:#020b05;border:1px solid #27713d;border-radius:2px;padding:11px 12px;min-width:0}
+.drag-card{cursor:grab;touch-action:none}
+.drag-card:active{cursor:grabbing}
+.drag-card:hover,.drop-target:hover,.drag-card:focus-visible,.drop-target:focus-visible{border-color:var(--glow);outline:2px solid #00d65a55;outline-offset:1px}
+.drag-card.is-selected{border-color:var(--warn);box-shadow:0 0 12px #e4ff4d35;background:#142006}
+.drag-card.is-placed{color:#b4ecc2}
+.drop-target{display:grid;gap:7px;min-height:74px;cursor:pointer}
+.drop-target .target-label{font-size:.84rem;font-weight:800;color:var(--glow)}
+.drop-target .target-value{font-size:.9rem;color:var(--muted)}
+.drop-target:not(.filled) .target-value{font-size:.78rem;opacity:.82}
+.drop-target.ready{border-style:dashed}
+.drop-target.is-over,.drop-target.filled{border-color:var(--glow);background:#063313;box-shadow:inset 0 0 18px #00ff6615}
+.drag-card:disabled,.drop-target:disabled{cursor:default;opacity:.88}
+@media(max-width:800px){.dragdrop{grid-template-columns:1fr}}
