@@ -52,7 +52,7 @@ function renderQuestion(q){
  }else{
   choices=`${q.multi?'<p class="instruction">Select all that apply.</p>':''}${q.options.map((o,i)=>{const chosen=(state.answers[q.id]||[]).includes(i);let cl='choice';if(reveal&&q.correct.includes(i))cl+=' correct';else if(reveal&&chosen)cl+=' wrong';return `<label class="${cl}"><input type="${q.multi?'checkbox':'radio'}" name="answer" value="${i}" ${chosen?'checked':''} ${reveal?'disabled':''}/><span class="letter">${letters[i]}</span><span>${escapeHtml(o)}</span></label>`;}).join('')}`;
  }
- let feedback='';if(reveal){const detail=q.type==='pbq'?`${isCorrect(q)?'All matches are correct.':'Correct mapping: '+pbqAnswerText(q)+'. '}${q.explanation}`:`Correct answer: ${choiceText(q,q.correct)}. ${q.explanation}`;feedback=`<div class="feedback ${isCorrect(q)?'good':'bad'}"><strong>${isCorrect(q)?'✓ Correct':'✕ Review the answer'}</strong><span>${escapeHtml(detail)}</span></div>`;}
+ let feedback='';if(reveal){const detail=q.type==='pbq'?`${isCorrect(q)?'All matches are correct. ':'Correct mapping: '+pbqAnswerText(q)+'. '}${q.explanation}`:`Correct answer: ${choiceText(q,q.correct)}. ${q.explanation}`;feedback=`<div class="feedback ${isCorrect(q)?'good':'bad'}"><strong>${isCorrect(q)?'✓ Correct':'✕ Review the answer'}</strong><span>${escapeHtml(detail)}</span></div>`;}
  const typeTag=q.type==='pbq'?'PBQ • performance-based task':q.multi?'Multiple response':'';
  return `<span class="domain-tag">${activeExam().domains[q.domain].name}</span>${typeTag?`<span class="type-tag">${typeTag}</span>`:''}<p class="stem">${escapeHtml(q.stem)}</p>${choices}${feedback}`;
 }
